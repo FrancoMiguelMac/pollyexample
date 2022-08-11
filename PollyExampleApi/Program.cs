@@ -5,9 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//FallbackPolicy fallbackPolicy = new();
+
 builder.Services.AddHttpClient<IService, Service>()
     .AddPolicyHandler(RetryPolicy.GetGenericRetryPolicy(retryCount: 3))
-    .AddPolicyHandler(CircuitBreakerPolicy.GetCircuitBreakerPolicy(exceptionsAllowedBeforeBreaking: 5, durationOfBreakInSeconds: 30));
+    //.AddPolicyHandler(fallbackPolicy.GetFallback()) // A ordem das policies interferem na execução pois nesse caso o fallback é em cima da exceção do circuit braker
+    .AddPolicyHandler(CircuitBreakerPolicy.GetCircuitBreakerPolicy(exceptionsAllowedBeforeBreaking: 5, durationOfBreakInSeconds: 15));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

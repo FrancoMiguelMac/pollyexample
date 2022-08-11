@@ -1,6 +1,5 @@
 ﻿using Polly;
 using Polly.Extensions.Http;
-using Polly.Retry;
 using System.Net;
 
 namespace PollyExampleApi.Policies

@@ -1,4 +1,6 @@
-﻿namespace PollyExampleApi.Services
+﻿using Polly.CircuitBreaker;
+
+namespace PollyExampleApi.Services
 {
     public class Service : IService
     {
@@ -15,7 +17,7 @@
                 var response = await _httpClient.GetAsync($"http://httpbin.org/status/{code}");
                 Console.WriteLine(response.IsSuccessStatusCode);
             }
-            catch (Polly.CircuitBreaker.BrokenCircuitException)
+            catch (BrokenCircuitException)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Requisição bloqueada.");
