@@ -22,7 +22,7 @@ namespace PollyExampleApi.Policies
 
         private Task<HttpResponseMessage> FallbackAction(DelegateResult<HttpResponseMessage> responseToFailedRequest, Context context, CancellationToken cancellationToken)
         {
-            HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+            HttpResponseMessage httpResponseMessage = new (HttpStatusCode.OK)
             {
                 Content = new StringContent(JsonSerializer.Serialize((Nome: "Miguel Mac Franco", Idade: 34)))
             };
